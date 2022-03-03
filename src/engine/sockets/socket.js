@@ -2,14 +2,19 @@
 
 class Socket{
 
-    constructor(ip, port){ 
-        this.ip = ip;
-        this.port = port;
+    constructor(ip, port, type){ 
+        this.address = "ws://" + ip + ":" + port;
+        if(type == "host"){ 
 
+        }
+        else{ 
+            ws = new WebSocket(address);
+        }
+        this.storage = null;
     }
 
     init(){ 
-        
+        this.socket = new net.Socket();
     }
 
     update(){ 
@@ -17,7 +22,7 @@ class Socket{
     }
 
     getInfo(){ 
-    
+        
     }
 
     recieveInfo(){ 
