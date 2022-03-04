@@ -18,7 +18,7 @@ wss.on("connection", (ws, req) => {
 
   console.log(
     "Connection made with userID " +
-      metadata +
+      id +
       " at " +
       new Date().toLocaleTimeString()
   );
