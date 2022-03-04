@@ -37,6 +37,7 @@ class MyGame extends engine.Scene {
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     await sleep(1000);
     this.socketTest.sendInfo("Hello World");
+    this.mMsg.setText(this.socketTest.recieveInfo());
   }
 
   // This is the draw function, make sure to setup proper drawing environment, and more

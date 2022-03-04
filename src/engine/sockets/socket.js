@@ -10,6 +10,8 @@ class Socket {
     this.ws = new WebSocket(this.address);
     // }
     this.storage = null;
+    this.storageMap = new Map();
+    this.storageMap.set('firstMsg', 0);
 
     // this.ws.onopen = function (e) {
     //   //   alert("[open] Connection established");
@@ -29,6 +31,7 @@ class Socket {
 
     this.ws.onmessage = function (event) {
       this.storage = JSON.parse(event.data);
+      this.storageMap.set('firstMsg', this.storage);
       console.log(this.storage);
     };
 
@@ -57,7 +60,10 @@ class Socket {
     this.ws.send(JSON.stringify(data));
   }
 
-  recieveInfo() {}
+  recieveInfo() {
+    console.log(this.storageMap.get('firstMsg'));
+    return this.storageMap.get('firstMsg');
+  }
 }
 
 export default Socket;
