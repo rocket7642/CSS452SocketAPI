@@ -11,6 +11,8 @@ class MyGame extends engine.Scene {
 
         this.mMsg = null;
 
+        this.socketTest = null;
+
         this.drawSet = [];
     }
         
@@ -30,6 +32,8 @@ class MyGame extends engine.Scene {
         this.mMsg.setTextHeight(5);
 
         this.drawSet.push(this.mMsg);
+
+        this.socketTest = new engine.Socket("192.168.274.274", 8080, "Client");
     }
     
     // This is the draw function, make sure to setup proper drawing environment, and more

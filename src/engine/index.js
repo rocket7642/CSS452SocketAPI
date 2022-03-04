@@ -51,6 +51,8 @@ import * as vertexBuffer from "./core/vertex_buffer.js";
 import * as shaderResources from "./core/shader_resources.js";
 import * as loop from "./core/loop.js";
 
+import Socket from "./sockets/socket.js";
+
 // general engine utilities
 function init(htmlCanvasID) {
     glSys.init(htmlCanvasID);
@@ -96,6 +98,8 @@ export default {
 
     // Game Objects
     GameObject, GameObjectSet,
+
+    Socket,
 
     // constants
     eTexCoordArrayIndex, eAnimationType, eBoundCollideStatus,
