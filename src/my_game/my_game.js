@@ -54,7 +54,9 @@ class MyGame extends engine.Scene {
 
   // The Update function, updates the application state. Make sure to _NOT_ draw
   // anything from this function!
-  update() {}
+  update() {
+    this.socketTest.printMap();
+  }
 }
 
 window.onload = function () {

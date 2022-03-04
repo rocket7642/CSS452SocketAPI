@@ -11,7 +11,7 @@ class Socket {
     // }
     this.storage = null;
     this.storageMap = new Map();
-    this.storageMap.set('firstMsg', 0);
+    this.storageMap.set("firstMsg", 0);
 
     // this.ws.onopen = function (e) {
     //   //   alert("[open] Connection established");
@@ -30,9 +30,8 @@ class Socket {
     });
 
     this.ws.onmessage = function (event) {
-      this.storage = JSON.parse(event.data);
-      this.storageMap.set('firstMsg', this.storage);
-      console.log(this.storage);
+      const msg = JSON.parse(event.data);
+      this.storageMap.set("firstMsg", msg);
     };
 
     this.ws.onclose = function (event) {
@@ -52,6 +51,11 @@ class Socket {
     // this.init();
   }
 
+  printMap() {
+    for (let [key, value] of this.storageMap.entries()) {
+      console.log(key, value);
+    }
+  }
   init() {}
 
   update() {}
@@ -61,8 +65,8 @@ class Socket {
   }
 
   recieveInfo() {
-    console.log(this.storageMap.get('firstMsg'));
-    return this.storageMap.get('firstMsg');
+    console.log(this.storageMap.get("firstMsg"));
+    return this.storageMap.get("firstMsg");
   }
 }
 
