@@ -19,11 +19,16 @@ class Socket {
     // };
 
     this.ws.addEventListener("open", () => {
-      this.ws.send("Hello");
+      this.ws.send(
+        JSON.stringify({
+          x: 254,
+          y: 30,
+        })
+      );
     });
 
     this.ws.onmessage = function (event) {
-      this.storage = `${event.data}`;
+      this.storage = JSON.parse(event.data);
       console.log(this.storage);
     };
 
@@ -41,7 +46,7 @@ class Socket {
 
     // this.ws.onerror = function (error) {
     //   alert(`[error] ${error.message}`);
-    this.init();
+    // this.init();
   }
 
   init() {}
@@ -49,7 +54,7 @@ class Socket {
   update() {}
 
   sendInfo(data) {
-    this.ws.send(data);
+    this.ws.send(JSON.stringify(data));
   }
 
   recieveInfo() {}

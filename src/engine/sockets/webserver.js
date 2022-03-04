@@ -1,20 +1,48 @@
 const WebSocket = require("ws");
 const wss = new WebSocket.Server({ port: 8080 });
 let sockets = [];
-let userID = 0;
+
+const clients = new Map();
+
+function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
 wss.on("connection", (ws, req) => {
-  sockets[userID] = ws;
-  userID++;
+  const id = uuidv4();
+  const metadata = { id };
+  clients.set(ws, metadata);
+
   console.log(
-    "Connection made with userID" +
-      userID +
+    "Connection made with userID " +
+      metadata +
       " at " +
       new Date().toLocaleTimeString()
   );
 
   ws.on("message", (message) => {
-    for (let socket of sockets) {
-      socket.send(message);
+    let msg;
+    try {
+      msg = JSON.parse(message);
+      console.log(msg);
+    } catch (e) {
+      console.log("Error parsing message: " + e);
     }
+    // const msg = message;
+    const data = clients.get(ws);
+    if (msg) {
+      msg.sender = data.id;
+      const outbound = JSON.stringify(msg);
+      [...clients.keys()].forEach((client) => {
+        client.send(outbound);
+      });
+    }
+  });
+
+  ws.on("close", () => {
+    clients.delete(ws);
   });
 });
