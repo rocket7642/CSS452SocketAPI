@@ -1,60 +1,58 @@
-"use strict"; 
+"use strict";
 
-class Socket{
+class Socket {
+  constructor(ip, port, type) {
+    this.address = "ws://localhost:8080";
+    // + ip + ":" + port;
+    console.log(this.address);
+    // if (type == "Host") {
+    // } else {
+    this.ws = new WebSocket(this.address);
+    // }
+    this.storage = null;
 
-    constructor(ip, port, type){ 
-        this.address = "ws://javascript.info/article/websocket/demo/hello";
-        // + ip + ":" + port;
-        console.log(this.address);
-        if(type == "Host"){ 
+    // this.ws.onopen = function (e) {
+    //   //   alert("[open] Connection established");
+    //   //   alert("Sending to server");
+    //   this.ws.send("Hello");
+    //   console.log("sent msg to server");
+    // };
 
-        }
-        else{ 
-            this.ws = new WebSocket(this.address); 
-        }
-        this.storage = null;
+    this.ws.addEventListener("open", () => {
+      this.ws.send("Hello");
+    });
 
-        this.ws.onopen = function(e) {
-            alert("[open] Connection established");
-            alert("Sending to server");
-        };
-          
-        this.ws.onmessage = function(event) {
-            this.storage = `${event.data}`;
-            console.log(this.storage);
-        };
-          
-        this.ws.onclose = function(event) {
-            if (event.wasClean) {
-              alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-            } else {
-              // e.g. server process killed or network down
-              // event.code is usually 1006 in this case
-              alert('[close] Connection died');
-            }
-        };
-          
-        this.ws.onerror = function(error) {
-            alert(`[error] ${error.message}`);
-        };
-    }
+    this.ws.onmessage = function (event) {
+      this.storage = `${event.data}`;
+      console.log(this.storage);
+    };
 
-    init(){ 
-        //this.socket = new net.Socket();
-    }
+    this.ws.onclose = function (event) {
+      //   if (event.wasClean) {
+      //     alert(
+      //       `[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`
+      //     );
+      //   } else {
+      //     // e.g. server process killed or network down
+      //     // event.code is usually 1006 in this case
+      //     alert("[close] Connection died");
+      //   }
+    };
 
-    update(){ 
+    // this.ws.onerror = function (error) {
+    //   alert(`[error] ${error.message}`);
+    this.init();
+  }
 
-    }
+  init() {}
 
-    sendInfo(data){ 
-        this.ws.send(data);
-    }
+  update() {}
 
-    recieveInfo(){ 
+  sendInfo(data) {
+    this.ws.send(data);
+  }
 
-    }
-
+  recieveInfo() {}
 }
 
 export default Socket;
