@@ -4,7 +4,7 @@ const storageMap = new Map();
 
 class Socket {
   constructor(ip, port, type) {
-    this.address = "ws://localhost:8080";
+    this.address = "ws://" + ip + ":" + port;
     // + ip + ":" + port;
     console.log(this.address);
     // if (type == "Host") {
@@ -27,6 +27,7 @@ class Socket {
       //       y: 30,
       //     })
       //   );
+      console.log("FR?");
     });
 
     this.ws.onmessage = function (event) {
