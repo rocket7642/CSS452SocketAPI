@@ -58,8 +58,8 @@ class MyGame extends engine.Scene {
     engine.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
 
     this.mCamera.setViewAndCameraMatrix();
-    for (let i = 0; i < this.drawSet.length; i++) {
-      this.drawSet[i].draw(this.mCamera);
+    for (let obj of this.drawSet) {
+      obj.draw(this.mCamera);
     }
   }
 
@@ -67,6 +67,13 @@ class MyGame extends engine.Scene {
   // anything from this function!
   update() {
     // this.socketTest.printMap();
+    if (engine.input.isKeyPressed(engine.input.keys.S)) {
+      this.socketTest.sendInfo("Hello World from S");
+    }
+    if (engine.input.isKeyPressed(engine.input.keys.R)) {
+      this.socketTest.sendInfo("Custom text from R");
+    }
+    this.mMsg.setText(this.socketTest.recieveInfo());
   }
 }
 

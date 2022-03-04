@@ -10,8 +10,8 @@ class Socket {
     // if (type == "Host") {
     // } else {
     this.ws = new WebSocket(this.address);
+
     // }
-    this.storage = null;
 
     // this.ws.onopen = function (e) {
     //   //   alert("[open] Connection established");

@@ -39,6 +39,9 @@ wss.on("connection", (ws, req) => {
       [...clients.keys()].forEach((client) => {
         client.send(outbound);
       });
+      console.log(
+        "Send message to all clients: " + outbound + " " + clients.size
+      );
     }
   });
 
