@@ -43,6 +43,12 @@ class MyGame extends engine.Scene {
     let msg = this.socketTest.recieveInfo();
     console.log("MSG RECIEVED " + msg);
     this.mMsg.setText(msg);
+    await sleep(1000);
+    this.socketTest.sendInfo("Change text");
+    await sleep(1000);
+    msg = this.socketTest.recieveInfo();
+    console.log("MSG RECIEVED " + msg);
+    this.mMsg.setText(msg);
   }
 
   // This is the draw function, make sure to setup proper drawing environment, and more
