@@ -1,5 +1,7 @@
 "use strict";
 
+const storageMap = new Map();
+
 class Socket {
   constructor(ip, port, type) {
     this.address = "ws://localhost:8080";
@@ -10,8 +12,6 @@ class Socket {
     this.ws = new WebSocket(this.address);
     // }
     this.storage = null;
-    this.storageMap = new Map();
-    this.storageMap.set("firstMsg", 0);
 
     // this.ws.onopen = function (e) {
     //   //   alert("[open] Connection established");
@@ -21,17 +21,18 @@ class Socket {
     // };
 
     this.ws.addEventListener("open", () => {
-      this.ws.send(
-        JSON.stringify({
-          x: 254,
-          y: 30,
-        })
-      );
+      //   this.ws.send(
+      //     JSON.stringify({
+      //       x: 254,
+      //       y: 30,
+      //     })
+      //   );
     });
 
     this.ws.onmessage = function (event) {
       const msg = JSON.parse(event.data);
-      this.storageMap.set("firstMsg", msg);
+      console.log("Message " + msg);
+      storageMap.set("key", msg);
     };
 
     this.ws.onclose = function (event) {
@@ -52,7 +53,7 @@ class Socket {
   }
 
   printMap() {
-    for (let [key, value] of this.storageMap.entries()) {
+    for (let [key, value] of storageMap.entries()) {
       console.log(key, value);
     }
   }
@@ -65,8 +66,12 @@ class Socket {
   }
 
   recieveInfo() {
-    console.log(this.storageMap.get("firstMsg"));
-    return this.storageMap.get("firstMsg");
+    for (let [key, value] of storageMap.entries()) {
+      console.log("Value ", value);
+      return value;
+    }
+    // console.log("KEYYY? " + storageMap.get("key"));
+    // return storageMap.get("key");
   }
 }
 

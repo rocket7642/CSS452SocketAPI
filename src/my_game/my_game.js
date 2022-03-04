@@ -37,7 +37,12 @@ class MyGame extends engine.Scene {
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     await sleep(1000);
     this.socketTest.sendInfo("Hello World");
-    this.mMsg.setText(this.socketTest.recieveInfo());
+
+    await sleep(2000);
+    // this.socketTest.recieveInfo();
+    let msg = this.socketTest.recieveInfo();
+    console.log("MSG RECIEVED " + msg);
+    this.mMsg.setText(msg);
   }
 
   // This is the draw function, make sure to setup proper drawing environment, and more
@@ -55,7 +60,7 @@ class MyGame extends engine.Scene {
   // The Update function, updates the application state. Make sure to _NOT_ draw
   // anything from this function!
   update() {
-    this.socketTest.printMap();
+    // this.socketTest.printMap();
   }
 }
 
