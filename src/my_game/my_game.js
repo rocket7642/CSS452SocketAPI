@@ -33,7 +33,7 @@ class MyGame extends engine.Scene {
 
     this.drawSet.push(this.mMsg);
 
-    this.socketTest = new engine.Socket("echo.websocket.events", "80", "Client");
+    this.socketTest = new engine.Socket("server.vonce.me", "80", "Client");
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     await sleep(1000);
     this.socketTest.sendInfo("Hello World");
